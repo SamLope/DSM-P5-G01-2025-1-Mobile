@@ -8,6 +8,10 @@ public partial class HomePage : ContentPage
 	}
     private void OnIniciarClicked(object sender, EventArgs e)
     {
-        
+        if (Parent is TabbedPage tabbedPage)
+        {
+            
+            tabbedPage.CurrentPage = tabbedPage.Children[1];
+        }
     }
 }

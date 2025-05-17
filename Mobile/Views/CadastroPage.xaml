@@ -5,7 +5,33 @@
              Title="CadastroPage"
              IconImageSource="login.png" 
              BackgroundColor="{StaticResource BackgroundColor}">
-    <StackLayout Padding="30" Spacing="20"  HorizontalOptions="Center">
+    <StackLayout Padding="30" Spacing="20">
         <Image Source="logoscore.png" HeightRequest="250" HorizontalOptions="Center"/>
+
+        <Entry x:Name="entryNome" 
+               Placeholder="Nome completo"
+               Style="{StaticResource PrimaryEntry}"/>
+
+        <Entry x:Name="entryIdade"
+               Placeholder="Idade"
+               Keyboard="Numeric"
+               Style="{StaticResource PrimaryEntry}"/>
+
+        <Picker x:Name="pickerSexo"
+                Title="Selecione o sexo"
+                Style="{StaticResource PrimaryPicker}">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Masculino</x:String>
+                    <x:String>Feminino</x:String>
+                    <x:String>Outro</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Button Text="Cadastrar"
+                Clicked="OnCadastrarClicked"
+                Style="{StaticResource PrimaryButton}"/>
     </StackLayout>
 </ContentPage>
+

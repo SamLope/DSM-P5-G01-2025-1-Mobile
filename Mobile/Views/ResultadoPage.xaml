@@ -4,10 +4,7 @@
              x:Class="Mobile.Views.ResultadoPage"
              Title="ResultadoPage"
              BackgroundColor="{StaticResource BackgroundColor}">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <StackLayout Padding="30" Spacing="20"  HorizontalOptions="Center">
+        <Image Source="logoscore.png" HeightRequest="250" HorizontalOptions="Center"/>
+    </StackLayout>
 </ContentPage>
