@@ -4,8 +4,8 @@
              x:Class="Mobile.Views.SobrePage"
              Title="SobrePage"
              IconImageSource="sobre.png" 
-             BackgroundColor="White">
-    
+             BackgroundColor="{StaticResource BackgroundColor}">
+
     <ScrollView>
         <StackLayout Padding="30" Spacing="20"  HorizontalOptions="Center">
             <Image Source="logoscore.png" HeightRequest="250" HorizontalOptions="Center"/>
@@ -17,17 +17,48 @@
 
             <Label Text="Este aplicativo foi criado como Projeto Integrador do curso Desenvolvimento de Software do 5º semestre."
                        FontSize="18"
-                       TextColor="#444"
+                       TextColor="#555"
                        HorizontalOptions="Center"
                        HorizontalTextAlignment="Center"/>
 
-            <Label Text="Ele simula a classificação de Score com base em Idade e Renda."
+            <Label Text="Ele simula a classificação de Score."
                        FontSize="18"
-                       TextColor="#444"
+                       TextColor="#555"
                        HorizontalOptions="Center"
                        HorizontalTextAlignment="Center"/>
 
-            
+            <Label Text="Desenvolvedores:"
+                   FontSize="18"
+                   TextColor="#FFA000"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="Alisson Rodrigues de Paula e Silva "
+                   FontSize="18"
+                   TextColor="#555"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="Paula Cristina Abib Teixeira"
+                   FontSize="18"
+                   TextColor="#555"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="Pauliane Ester Silveira"
+                   FontSize="18"
+                   TextColor="#555"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Text="Samir Lopes Rosa"
+                   FontSize="18"
+                   TextColor="#555"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"/>
+
+
         </StackLayout>
     </ScrollView>
 </ContentPage>
