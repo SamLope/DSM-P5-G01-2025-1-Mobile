@@ -1,35 +1,32 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mobile.Views.TestePage"
-             Title="TestePage"
+             Title="Teste"
              BackgroundColor="{StaticResource BackgroundColor}">
 
-    <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,*" 
-              RowSpacing="40"
-              VerticalOptions="Center"
-              Padding="30,40"
-              HeightRequest="{OnPlatform iOS=600, Android=600, WinUI=600}">
+    <Grid>
+        <ScrollView>
+            <Grid RowDefinitions="Auto,Auto,*" 
+                  RowSpacing="40"
+                  VerticalOptions="Center"
+                  Padding="30,40">
 
-           
-            <Image Source="logoscore.png" 
-                   HeightRequest="250" 
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   Grid.Row="0"/>
+                <Image Source="logoscore.png" 
+                       HeightRequest="250" 
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Grid.Row="0"/>
 
-            
-            <Label x:Name="lblPergunta"
-                   FontSize="22"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"
-                   LineBreakMode="WordWrap"
-                   MaximumWidthRequest="300"  
-                   TextColor="{StaticResource TextColor}"
-                   Grid.Row="1"/>
+                <Label x:Name="lblPergunta"
+                       FontSize="22"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       LineBreakMode="WordWrap"
+                       MaximumWidthRequest="300"
+                       TextColor="{StaticResource TextColor}"
+                       Grid.Row="1"/>
 
-               
                 <Grid ColumnDefinitions="*,*" 
                       ColumnSpacing="20"
                       RowSpacing="0"
@@ -38,17 +35,31 @@
 
                     <Button Text="Sim" 
                             Clicked="OnSimClicked"
-                            Style="{StaticResource PrimaryButton}"
+                            BackgroundColor="{StaticResource PrimaryColor}"
+                            TextColor="White"
                             HeightRequest="60"
-                            FontSize="18"/>
+                            FontSize="18"
+                            CornerRadius="30"/>
 
                     <Button Text="Não" 
                             Clicked="OnNaoClicked"
-                            Style="{StaticResource SecondaryButton}"
+                            BackgroundColor="{StaticResource SecondaryColor}"
+                            TextColor="{StaticResource TextColor}"
                             HeightRequest="60"
                             FontSize="18"
+                            CornerRadius="30"
                             Grid.Column="1"/>
                 </Grid>
-        </Grid>
-    </ScrollView>
+            </Grid>
+        </ScrollView>
+
+        <ActivityIndicator x:Name="loadingIndicator"
+                          IsVisible="False"
+                          Color="{StaticResource PrimaryColor}"
+                          IsRunning="True"
+                          HorizontalOptions="Center"
+                          VerticalOptions="Center"
+                          BackgroundColor="Transparent"
+                          Scale="1.5"/>
+    </Grid>
 </ContentPage>

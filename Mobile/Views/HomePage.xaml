@@ -18,19 +18,21 @@
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   TextColor="#fb8c00" />
+                   TextColor="{StaticResource PrimaryColor}" />
 
             <Label Text="Aplicativo para classificar seu Score."
                    FontSize="18"
                    HorizontalOptions="Center"
-                   TextColor="#555" />
+                   TextColor="{StaticResource TextColor}" />
 
             <Button Text="Iniciar Análise"
                     Clicked="OnIniciarClicked"
-                    Style="{StaticResource PrimaryButton}"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="Black"
                     HorizontalOptions="Center"
-                    WidthRequest="200" />
+                    WidthRequest="200"
+                    HeightRequest="60"
+                    CornerRadius="30"/>
         </StackLayout>
     </Grid>
-
 </ContentPage>

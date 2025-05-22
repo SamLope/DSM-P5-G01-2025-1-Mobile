@@ -8,9 +8,10 @@ namespace Mobile.Models
 {
     public class Usuario
     {
-        public int Id { get; set; } // Id retornado da API
-        public string Nome { get; set; }
+        public int Id { get; set; } // Será preenchido pela API
+        public string Nome { get; set; } = string.Empty;
         public int Idade { get; set; }
-        public string Sexo { get; set; } // "Masculino", "Feminino" ou "Outro"
+        public string Sexo { get; set; } = string.Empty;
+        public DateTime CriadoEm { get; set; }
     }
 }

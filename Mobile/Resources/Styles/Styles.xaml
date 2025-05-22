@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <!-- Cores -->
-    <Color x:Key="PrimaryColor">#fb8c00</Color>
+    <Color x:Key="PrimaryColor">#fdd835</Color>
     <Color x:Key="SecondaryColor">#fdd835</Color>
     <Color x:Key="AccentColor">#43a047</Color>
     <Color x:Key="ErrorColor">#e53935</Color>
@@ -10,39 +10,42 @@
     <Color x:Key="TextColor">#555</Color>
     <Color x:Key="SubtitleColor">#888</Color>
 
-    <!-- Estilo padrão para Labels -->
+    <!-- Estilos Padrão -->
     <Style TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextColor}" />
         <Setter Property="FontSize" Value="16" />
     </Style>
 
-    <!-- Estilo para botões principais -->
-    <Style x:Key="PrimaryButton" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}" />
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="CornerRadius" Value="12" />
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property="Padding" Value="14" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="WidthRequest" Value="200" />
-    </Style>
-    <!-- Styles.xaml -->
+    <!-- Estilos Customizados -->
     <Style x:Key="PrimaryEntry" TargetType="Entry">
-        <Setter Property="PlaceholderColor" Value="#888"/>
-        <Setter Property="TextColor" Value="#333"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource SubtitleColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="Margin" Value="0,0,0,10"/>
+        <Setter Property="BackgroundColor" Value="White"/>
     </Style>
 
     <Style x:Key="PrimaryPicker" TargetType="Picker">
-        <Setter Property="TextColor" Value="#333"/>
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="BackgroundColor" Value="White"/>
     </Style>
 
-    <Style x:Key="SecondaryButton" TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
-        <Setter Property="BackgroundColor" Value="#E0E0E0"/>
-        <Setter Property="TextColor" Value="#333"/>
+    <Style x:Key="PrimaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="CornerRadius" Value="30"/>
+    </Style>
+
+    <Style x:Key="SecondaryButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="CornerRadius" Value="30"/>
     </Style>
 </ResourceDictionary>

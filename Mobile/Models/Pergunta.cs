@@ -9,6 +9,7 @@ namespace Mobile.Models
     public class Pergunta
     {
         public int Id { get; set; }
-        public string TextoPergunta { get; set; } 
+        public string TextoPergunta { get; set; }
+        public string ColunaDataset { get; set; } // Campo adicional do seu banco
     }
 }

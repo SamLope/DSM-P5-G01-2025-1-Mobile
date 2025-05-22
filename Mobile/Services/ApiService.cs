@@ -1,59 +1,85 @@
-﻿using System.Net.Http;
+﻿using Mobile.Models;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Mobile.Models;
+using System.Text.Json;
 
-namespace Mobile.Services
+namespace Mobile.Services;
+
+public class ApiService
 {
-    public class ApiService
+    private readonly HttpClient _httpClient;
+    private const string BaseUrl = "https://five-dsm-pi-backend.onrender.com";
+
+    public ApiService(HttpClient httpClient)
     {
-        private readonly HttpClient _http;
+        _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+        _httpClient.BaseAddress = new Uri(BaseUrl);
+    }
 
-        public ApiService(string baseUrl)
+    public async Task<int> CadastrarUsuario(Usuario usuario)
+    {
+        if (usuario == null)
+            throw new ArgumentNullException(nameof(usuario));
+
+        try
         {
-            _http = new HttpClient { BaseAddress = new Uri(baseUrl) };
-        }
+            // 1. Serializa o objeto para verificação (debug)
+            var jsonRequest = JsonSerializer.Serialize(usuario);
+            Console.WriteLine($"Enviando para API: {jsonRequest}");
 
-        //  Cadastrar usuário
-        public async Task<int> CreateUserAsync(Usuario usuario)
-        {
-            var response = await _http.PostAsJsonAsync("/usuarios", usuario);
-            response.EnsureSuccessStatusCode();
+            // 2. Envia para a API
+            var response = await _httpClient.PostAsJsonAsync("/usuarios", usuario);
+            var responseContent = await response.Content.ReadAsStringAsync();
 
-            var json = await response.Content.ReadFromJsonAsync<CreateResponse>();
-            return json.Id;
-        }
+            Console.WriteLine($"Resposta da API: {responseContent}"); // Debug
 
-        //  Obter perguntas
-        public async Task<List<Pergunta>> GetQuestionsAsync()
-        {
-            var resp = await _http.GetFromJsonAsync<QuestionsResponse>("/perguntas");
-            return resp.Perguntas;
-        }
-
-        // Enviar respostas
-        public async Task SendAnswersAsync(int userId, List<RespostaUsuario> respostas)
-        {
-            var payload = new
+            // 3. Verifica status da resposta
+            if (!response.IsSuccessStatusCode)
             {
-                id_usuario = userId,
-                respostas = respostas
-            };
-            var response = await _http.PostAsJsonAsync("/respostas", payload);
-            response.EnsureSuccessStatusCode();
-        }
+                throw new Exception($"Erro na API: {response.StatusCode} - {responseContent}");
+            }
 
-        // Classes internas para desserialização
-        private class CreateResponse
-        {
-            public string Message { get; set; }
-            public int Id { get; set; }
-        }
+            // 4. Desserializa a resposta completa
+            var usuarioCriado = JsonSerializer.Deserialize<Usuario>(responseContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true // Para aceitar "criado_em" vs "CriadoEm"
+            });
 
-        private class QuestionsResponse
-        {
-            public List<Pergunta> Perguntas { get; set; }
+            // 5. Retorna o ID gerado
+            return usuarioCriado?.Id ?? throw new Exception("ID não retornado pela API");
         }
+        catch (JsonException ex)
+        {
+            throw new Exception($"Erro ao processar resposta: {ex.Message}");
+        }
+    }
+    public async Task<List<Pergunta>> GetPerguntasAsync()
+    {
+        try
+        {
+            var response = await _httpClient.GetFromJsonAsync<ApiResponse<List<Pergunta>>>("/perguntas");
+            return response?.Data ?? new List<Pergunta>();
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new Exception("Falha na comunicação com a API", ex);
+        }
+    }
+
+    public async Task CadastrarRespostaAsync(Resposta resposta)
+    {
+        if (resposta == null)
+            throw new ArgumentNullException(nameof(resposta));
+
+        var response = await _httpClient.PostAsJsonAsync("/respostas", resposta);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task CadastrarResultadoAsync(Resultado resultado)
+    {
+        if (resultado == null)
+            throw new ArgumentNullException(nameof(resultado));
+
+        var response = await _httpClient.PostAsJsonAsync("/resultados", resultado);
+        response.EnsureSuccessStatusCode();
     }
 }

@@ -34,7 +34,7 @@
                    HorizontalOptions="Center"
                    HorizontalTextAlignment="Center"/>
 
-            <Label Text="Alisson Rodrigues de Paula e Silva "
+            <Label Text="Allison Rodrigues de Paula e Silva "
                    FontSize="18"
                    TextColor="#555"
                    HorizontalOptions="Center"

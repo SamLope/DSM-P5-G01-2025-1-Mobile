@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mobile.Views.CadastroPage"
-             Title="CadastroPage"
+             Title="Cadastro"
              IconImageSource="login.png" 
              BackgroundColor="{StaticResource BackgroundColor}">
     <StackLayout Padding="30" Spacing="20">
@@ -31,7 +31,10 @@
 
         <Button Text="Cadastrar"
                 Clicked="OnCadastrarClicked"
-                Style="{StaticResource PrimaryButton}"/>
+                BackgroundColor="{StaticResource PrimaryColor}"
+                TextColor="Black"
+                HeightRequest="60"
+                FontSize="18"
+                CornerRadius="30"/>
     </StackLayout>
 </ContentPage>
-

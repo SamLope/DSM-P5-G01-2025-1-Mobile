@@ -9,9 +9,9 @@ public partial class MenuPrincipal : Microsoft.Maui.Controls.TabbedPage
     {
         InitializeComponent();
 
-       
+
         On<Microsoft.Maui.Controls.PlatformConfiguration.Android>().SetToolbarPlacement(Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific.ToolbarPlacement.Bottom);
 
-       
+
     }
 }
