@@ -6,35 +6,53 @@
              IconImageSource="login.png" 
              BackgroundColor="{StaticResource BackgroundColor}">
     <StackLayout Padding="30" Spacing="20">
-        <Image Source="logoscore.png" HeightRequest="250" HorizontalOptions="Center"/>
+        <Image Source="logoscore.png" 
+               HeightRequest="250" 
+               HorizontalOptions="Center"/>
 
-        <Entry x:Name="entryNome" 
-               Placeholder="Nome completo"
-               Style="{StaticResource PrimaryEntry}"/>
+        <!-- Entry para Nome -->
+        <Frame 
+            BackgroundColor="White"
+            BorderColor="{StaticResource PrimaryColor}"
+            CornerRadius="30"
+            Padding="10"
+            HasShadow="False"
+            Margin="0,0,0,10">
+            <Entry x:Name="entryNome" 
+                   Placeholder="Nome completo"
+                   BackgroundColor="Transparent"
+                   TextColor="Black"
+                   HeightRequest="60"
+                   FontSize="16"/>
+        </Frame>
 
-        <Entry x:Name="entryIdade"
-               Placeholder="Idade"
-               Keyboard="Numeric"
-               Style="{StaticResource PrimaryEntry}"/>
+        <!-- Picker para Sexo -->
+        <Frame 
+            BackgroundColor="White"
+            BorderColor="{StaticResource PrimaryColor}"
+            CornerRadius="30"
+            Padding="10"
+            HasShadow="False"
+            Margin="0,0,0,20">
+            <Picker x:Name="pickerSexo"
+                    Title="Selecione o sexo"
+                    BackgroundColor="Transparent"
+                    TextColor="Black"
+                    HeightRequest="60"
+                    FontSize="16">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Masculino</x:String>
+                        <x:String>Feminino</x:String>
+                        <x:String>Outro</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </Frame>
 
-        <Picker x:Name="pickerSexo"
-                Title="Selecione o sexo"
-                Style="{StaticResource PrimaryPicker}">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Masculino</x:String>
-                    <x:String>Feminino</x:String>
-                    <x:String>Outro</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-
+        <!-- Botão de Cadastro -->
         <Button Text="Cadastrar"
                 Clicked="OnCadastrarClicked"
-                BackgroundColor="{StaticResource PrimaryColor}"
-                TextColor="Black"
-                HeightRequest="60"
-                FontSize="18"
-                CornerRadius="30"/>
+                Style="{StaticResource PrimaryButton}" />
     </StackLayout>
 </ContentPage>

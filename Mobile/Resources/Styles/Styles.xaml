@@ -7,7 +7,7 @@
     <Color x:Key="AccentColor">#43a047</Color>
     <Color x:Key="ErrorColor">#e53935</Color>
     <Color x:Key="BackgroundColor">#FFFFFF</Color>
-    <Color x:Key="TextColor">#555</Color>
+    <Color x:Key="TextColor">Black</Color>
     <Color x:Key="SubtitleColor">#888</Color>
 
     <!-- Estilos Padrão -->
@@ -35,7 +35,7 @@
 
     <Style x:Key="PrimaryButton" TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}"/>
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="Black"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="HeightRequest" Value="60"/>
         <Setter Property="CornerRadius" Value="30"/>

@@ -14,7 +14,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .ConfigureFonts(fonts => { /* ... */ });
 
-        
+
         builder.Services.AddHttpClient<ApiService>(client =>
         {
             client.BaseAddress = new Uri("https://five-dsm-pi-backend.onrender.com");
@@ -22,8 +22,8 @@ public static class MauiProgram
                 new MediaTypeWithQualityHeaderValue("application/json"));
         });
 
-       
-        builder.Services.AddTransient<TestePage>(); 
+
+        builder.Services.AddTransient<TestePage>();
         builder.Services.AddSingleton<MenuPrincipal>();
         builder.Services.AddSingleton<ApiService>();
 #if DEBUG

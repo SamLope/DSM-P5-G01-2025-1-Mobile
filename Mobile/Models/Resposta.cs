@@ -12,5 +12,6 @@ namespace Mobile.Models
         public int IdPergunta { get; set; }
         public bool RespostaSimNao { get; set; }
         public double ValorResposta { get; set; }
+        public string ColunaDataSet { get; set; } = string.Empty; // Adicione esta linha
     }
 }

@@ -18,7 +18,14 @@
                    FontSize="28"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
-                   TextColor="{StaticResource PrimaryColor}" />
+                   TextColor="{StaticResource PrimaryColor}">
+                <Label.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="2,2"
+                            Opacity="0.8"
+                            Radius="2"/>
+                </Label.Shadow>
+            </Label>
 
             <Label Text="Aplicativo para classificar seu Score."
                    FontSize="18"
@@ -29,6 +36,7 @@
                     Clicked="OnIniciarClicked"
                     BackgroundColor="{StaticResource PrimaryColor}"
                     TextColor="Black"
+                    FontSize="18"
                     HorizontalOptions="Center"
                     WidthRequest="200"
                     HeightRequest="60"

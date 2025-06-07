@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mobile.Views.TestePage"
@@ -6,60 +5,77 @@
              BackgroundColor="{StaticResource BackgroundColor}">
 
     <Grid>
-        <ScrollView>
-            <Grid RowDefinitions="Auto,Auto,*" 
-                  RowSpacing="40"
-                  VerticalOptions="Center"
-                  Padding="30,40">
+        <!-- CarouselView com logo + pergunta + resposta -->
+        <CarouselView x:Name="PerguntasCarousel"
+                      ItemsSource="{Binding Perguntas}"
+                      VerticalOptions="FillAndExpand"
+                      IndicatorView="indicatorView"
+                      IsBounceEnabled="True"
+                      Margin="20,40,20,100">
 
-                <Image Source="logoscore.png" 
-                       HeightRequest="250" 
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="20" Spacing="25"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand">
+
+                        <!-- LOGO -->
+                        <Image Source="logoscore.png"
+                               HeightRequest="220"
+                               HorizontalOptions="Center"
+                               Margin="0,0,0,0"/>
+
+                        <!-- Pergunta em um card (Frame) -->
+                        <Frame BackgroundColor="#fdd835"
+                               CornerRadius="20"
+                               Padding="25"
+                               HasShadow="True"
+                               BorderColor="WhiteSmoke"
+                               Margin="0,0,0,10">
+                            <Label Text="{Binding TextoPergunta}"
+                                   FontSize="18"
+                                   FontAttributes="None"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="{StaticResource TextColor}"
+                                   LineBreakMode="WordWrap"/>
+                        </Frame>
+
+                        <!-- Container da Resposta -->
+                        <ContentView x:Name="RespostaContainer"
+                                     VerticalOptions="CenterAndExpand"
+                                     HorizontalOptions="FillAndExpand"
+                                     Padding="10"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!-- IndicatorView -->
+        <IndicatorView x:Name="indicatorView"
                        HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       Grid.Row="0"/>
+                       VerticalOptions="End"
+                       Margin="0,0,0,80"
+                       IndicatorColor="{StaticResource SubtitleColor}"
+                       SelectedIndicatorColor="{StaticResource PrimaryColor}"/>
 
-                <Label x:Name="lblPergunta"
-                       FontSize="22"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       LineBreakMode="WordWrap"
-                       MaximumWidthRequest="300"
-                       TextColor="{StaticResource TextColor}"
-                       Grid.Row="1"/>
+        <!-- Botão Finalizar -->
+        <Button Text="Finalizar Teste"
+                Clicked="OnFinalizarClicked"
+                IsVisible="{Binding TodasRespondidas}"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                TextColor="Black"
+                CornerRadius="30"
+                HeightRequest="60"
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Margin="20,0,20,20"/>
 
-                <Grid ColumnDefinitions="*,*" 
-                      ColumnSpacing="20"
-                      RowSpacing="0"
-                      VerticalOptions="End"
-                      Grid.Row="2">
-
-                    <Button Text="Sim" 
-                            Clicked="OnSimClicked"
-                            BackgroundColor="{StaticResource PrimaryColor}"
-                            TextColor="White"
-                            HeightRequest="60"
-                            FontSize="18"
-                            CornerRadius="30"/>
-
-                    <Button Text="Não" 
-                            Clicked="OnNaoClicked"
-                            BackgroundColor="{StaticResource SecondaryColor}"
-                            TextColor="{StaticResource TextColor}"
-                            HeightRequest="60"
-                            FontSize="18"
-                            CornerRadius="30"
-                            Grid.Column="1"/>
-                </Grid>
-            </Grid>
-        </ScrollView>
-
+        <!-- ActivityIndicator -->
         <ActivityIndicator x:Name="loadingIndicator"
-                          IsVisible="False"
-                          Color="{StaticResource PrimaryColor}"
-                          IsRunning="True"
-                          HorizontalOptions="Center"
-                          VerticalOptions="Center"
-                          BackgroundColor="Transparent"
-                          Scale="1.5"/>
+                           IsVisible="False"
+                           Color="{StaticResource PrimaryColor}"
+                           IsRunning="True"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
     </Grid>
 </ContentPage>

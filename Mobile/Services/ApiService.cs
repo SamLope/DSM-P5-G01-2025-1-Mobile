@@ -56,14 +56,16 @@ public class ApiService
     {
         try
         {
-            var response = await _httpClient.GetFromJsonAsync<ApiResponse<List<Pergunta>>>("/perguntas");
-            return response?.Data ?? new List<Pergunta>();
+            var response = await _httpClient.GetFromJsonAsync<PerguntasResponse>("/perguntas");
+
+            return response?.Perguntas ?? new List<Pergunta>();
         }
         catch (HttpRequestException ex)
         {
             throw new Exception("Falha na comunicação com a API", ex);
         }
     }
+
 
     public async Task CadastrarRespostaAsync(Resposta resposta)
     {
@@ -80,6 +82,12 @@ public class ApiService
             throw new ArgumentNullException(nameof(resultado));
 
         var response = await _httpClient.PostAsJsonAsync("/resultados", resultado);
+        response.EnsureSuccessStatusCode();
+    }
+
+    public async Task EnviarRespostasEmLote(List<Resposta> respostas)
+    {
+        var response = await _httpClient.PostAsJsonAsync("/respostas/lote", new { respostas });
         response.EnsureSuccessStatusCode();
     }
 }
