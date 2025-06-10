@@ -11,5 +11,7 @@ namespace Mobile.Models
 
         [JsonPropertyName("texto_pergunta")]
         public string TextoPergunta { get; set; }
+
+        public double? ValorDigitado { get; set; }
     }
 }

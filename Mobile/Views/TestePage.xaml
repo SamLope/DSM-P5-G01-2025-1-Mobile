@@ -4,78 +4,69 @@
              Title="Teste"
              BackgroundColor="{StaticResource BackgroundColor}">
 
-    <Grid>
-        <!-- CarouselView com logo + pergunta + resposta -->
-        <CarouselView x:Name="PerguntasCarousel"
-                      ItemsSource="{Binding Perguntas}"
-                      VerticalOptions="FillAndExpand"
-                      IndicatorView="indicatorView"
-                      IsBounceEnabled="True"
-                      Margin="20,40,20,100">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="25"
+                     VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     x:Name="MainStack">
 
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="20" Spacing="25"
-                                 VerticalOptions="FillAndExpand"
-                                 HorizontalOptions="FillAndExpand">
+            <!-- LOGO -->
+            <Image Source="logoscore.png"
+                   HeightRequest="220"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,0"/>
 
-                        <!-- LOGO -->
-                        <Image Source="logoscore.png"
-                               HeightRequest="220"
+            <!-- Pergunta atual -->
+            <Frame BackgroundColor="#fdd835"
+                   CornerRadius="20"
+                   Padding="25"
+                   HasShadow="True"
+                   BorderColor="WhiteSmoke"
+                   Margin="0,0,0,10">
+                <Label Text="{Binding PerguntaAtual.TextoPergunta}"
+                       FontSize="18"
+                       FontAttributes="None"
+                       HorizontalTextAlignment="Center"
+                       TextColor="{StaticResource TextColor}"
+                       LineBreakMode="WordWrap"/>
+            </Frame>
+
+            <!-- Entry para resposta -->
+            <Entry Text="{Binding PerguntaAtual.ValorDigitado, Mode=TwoWay}"
+                   Keyboard="Numeric"
+                   Placeholder="Digite um valor"
+                   HorizontalOptions="Center"
+                   Style="{StaticResource PrimaryEntry}"
+                   TextChanged="OnEntryTextChanged"/>
+
+            <!-- Botão Avançar -->
+            <Button x:Name="BotaoAvancar"
+                    Text="Avançar"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="Black"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    IsEnabled="False"
+                    Clicked="OnAvancarClicked"/>
+
+            <!-- Botão Finalizar -->
+            <Button x:Name="BotaoFinalizar"
+                    Text="Finalizar Teste"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="Black"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    IsVisible="False"
+                    Clicked="OnFinalizarClicked"/>
+
+            <!-- ActivityIndicator -->
+            <ActivityIndicator x:Name="loadingIndicator"
+                               IsVisible="False"
+                               Color="{StaticResource PrimaryColor}"
+                               IsRunning="True"
                                HorizontalOptions="Center"
-                               Margin="0,0,0,0"/>
+                               VerticalOptions="Center"/>
 
-                        <!-- Pergunta em um card (Frame) -->
-                        <Frame BackgroundColor="#fdd835"
-                               CornerRadius="20"
-                               Padding="25"
-                               HasShadow="True"
-                               BorderColor="WhiteSmoke"
-                               Margin="0,0,0,10">
-                            <Label Text="{Binding TextoPergunta}"
-                                   FontSize="18"
-                                   FontAttributes="None"
-                                   HorizontalTextAlignment="Center"
-                                   TextColor="{StaticResource TextColor}"
-                                   LineBreakMode="WordWrap"/>
-                        </Frame>
-
-                        <!-- Container da Resposta -->
-                        <ContentView x:Name="RespostaContainer"
-                                     VerticalOptions="CenterAndExpand"
-                                     HorizontalOptions="FillAndExpand"
-                                     Padding="10"/>
-                    </StackLayout>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
-
-        <!-- IndicatorView -->
-        <IndicatorView x:Name="indicatorView"
-                       HorizontalOptions="Center"
-                       VerticalOptions="End"
-                       Margin="0,0,0,80"
-                       IndicatorColor="{StaticResource SubtitleColor}"
-                       SelectedIndicatorColor="{StaticResource PrimaryColor}"/>
-
-        <!-- Botão Finalizar -->
-        <Button Text="Finalizar Teste"
-                Clicked="OnFinalizarClicked"
-                IsVisible="{Binding TodasRespondidas}"
-                BackgroundColor="{StaticResource PrimaryColor}"
-                TextColor="Black"
-                CornerRadius="30"
-                HeightRequest="60"
-                HorizontalOptions="Center"
-                VerticalOptions="End"
-                Margin="20,0,20,20"/>
-
-        <!-- ActivityIndicator -->
-        <ActivityIndicator x:Name="loadingIndicator"
-                           IsVisible="False"
-                           Color="{StaticResource PrimaryColor}"
-                           IsRunning="True"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-    </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
