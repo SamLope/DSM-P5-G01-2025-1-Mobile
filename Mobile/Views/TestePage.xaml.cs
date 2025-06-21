@@ -125,10 +125,10 @@ namespace Mobile.Views
             {
                 loadingIndicator.IsVisible = true;
 
-                // 1. Salva localmente
+                //  Salva localmente
                 await _storageService.SaveRespostasAsync(_viewModel.Respostas);
 
-                // 2. Prepara objeto RespostasAgregadas com as respostas
+                //  Prepara objeto RespostasAgregadas com as respostas
                 var respostasAgregadas = new RespostasAgregadas
                 {
                     IdUsuario = App.CurrentUserId,
@@ -144,22 +144,22 @@ namespace Mobile.Views
                     Resposta10 = ObterValorResposta(10)
                 };
 
-                // 3. Serializa para JSON
+                //  Serializa para JSON
                 var json = JsonSerializer.Serialize(respostasAgregadas);
 
-                // 4. MOSTRA no Console para ver se está correto
+                //  MOSTRA no Console para ver se está correto
                 Console.WriteLine("Payload enviado: " + json);
 
-                // 5. Envia para API
+                //  Envia para API
                 await App.ApiClient.EnviarRespostasAgregadas(respostasAgregadas);
 
-                // 6. Mensagem de sucesso (opcional)
+                //  Mensagem de sucesso 
                 await DisplayAlert("Sucesso", "Respostas enviadas com sucesso!", "OK");
 
-                // 7. Vai para ResultadoPage
+                //  Vai para ResultadoPage
                 if (Parent is TabbedPage tabbedPage)
                 {
-                    tabbedPage.CurrentPage = tabbedPage.Children[3]; // ResultadoPage
+                    tabbedPage.CurrentPage = tabbedPage.Children[3]; 
                 }
             }
             catch (Exception ex)

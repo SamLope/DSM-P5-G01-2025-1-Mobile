@@ -1,13 +1,14 @@
 ﻿using Mobile.Models;
 using System.Net.Http.Json;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Mobile.Services
 {
     public class ApiService
     {
         private readonly HttpClient _httpClient;
-        private const string BaseUrl = "https://five-dsm-pi-backend.onrender.com";
+        private const string BaseUrl = "http://40.65.223.83:3000";
 
         public ApiService(HttpClient httpClient)
         {
@@ -79,5 +80,58 @@ namespace Mobile.Services
             }
         }
 
+        public async Task<(int Resultado, string NomeUsuario)> ObterUltimoResultadoAsync(int idUsuario)
+        {
+            try
+            {
+                var rawJson = await _httpClient.GetStringAsync("/resultados");
+                var response = JsonSerializer.Deserialize<ResultadoListResponse>(rawJson, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                if (response?.Resultados == null || response.Resultados.Count == 0)
+                    throw new Exception("Nenhum resultado retornado pela API.");
+
+                var resultadoUsuario = response.Resultados
+                    .Where(r => r.IdUsuario == idUsuario)
+                    .OrderByDescending(r => r.CriadoEm)
+                    .FirstOrDefault();
+
+                if (resultadoUsuario == null)
+                    throw new Exception($"Nenhum resultado encontrado para o usuário {idUsuario}");
+
+                // ✅ Corrigido aqui:
+                var usuarioResponse = await _httpClient.GetFromJsonAsync<UsuarioResponse>($"/usuarios/{idUsuario}");
+                var usuario = usuarioResponse?.Usuario;
+
+                int resultadoInt = int.TryParse(resultadoUsuario.ResultadoTexto, out var valor) ? valor : -1;
+
+                return (resultadoInt, usuario?.Nome ?? "Usuário Desconhecido");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Erro ao buscar resultado: {ex.Message}");
+                throw;
+            }
+        }
+
+
+
+        public async Task<Usuario> ObterUltimoUsuarioAsync()
+        {
+            try
+            {
+                var usuarios = await _httpClient.GetFromJsonAsync<List<Usuario>>("/usuarios");
+                if (usuarios == null || usuarios.Count == 0)
+                    throw new Exception("Nenhum usuário encontrado.");
+
+                return usuarios.OrderByDescending(u => u.Id).First();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar usuários: {ex.Message}");
+            }
+        }
     }
 }

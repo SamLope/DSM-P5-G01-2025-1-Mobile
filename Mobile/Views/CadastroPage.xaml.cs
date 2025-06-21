@@ -7,7 +7,7 @@ public partial class CadastroPage : ContentPage
 {
     private readonly ApiService _apiService;
 
-    public static int UsuarioId { get; private set; } // Armazena o ID global do usuário (se necessário)
+    public static int UsuarioId { get; private set; } // Armazena o ID global do usuário 
 
     public CadastroPage()
     {

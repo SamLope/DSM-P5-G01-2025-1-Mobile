@@ -1,14 +1,42 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mobile.Views.ResultadoPage"
              Title="Score"
-             BackgroundColor="{StaticResource BackgroundColor}">
+             x:Name="resultadoPage"
+             BackgroundColor="White">
+
     <StackLayout Padding="30" Spacing="20" HorizontalOptions="Center">
-        <Image Source="logoscore.png" HeightRequest="250" HorizontalOptions="Center"/>
-        <Label Text="Seu Score:"
-               FontSize="24"
-               TextColor="{StaticResource PrimaryColor}"
+
+        <Image x:Name="imageResultado" HeightRequest="300" HorizontalOptions="Center" Opacity="0"/>
+
+        <Label x:Name="labelNome"
+               FontSize="25"
+               FontAttributes="Bold"
+               TextColor="Black"
                HorizontalOptions="Center"/>
+
+        <Label x:Name="labelUltimoUsuario"
+               FontSize="18"
+               TextColor="DarkGray"
+               HorizontalOptions="Center"
+               Margin="0,20,0,0" />
+
+
+        <Label x:Name="labelResultado"
+               FontSize="45"
+               FontAttributes="Bold"
+               TextColor="Black"
+               HorizontalOptions="Center"/>
+
+        <Label x:Name="labelMensagem"
+               FontSize="18"
+               FontAttributes="Italic"
+               TextColor="Black"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               Margin="30,45"/>
+
+        
+
     </StackLayout>
 </ContentPage>
