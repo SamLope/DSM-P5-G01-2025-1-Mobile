@@ -13,6 +13,10 @@ public partial class CadastroPage : ContentPage
     {
         InitializeComponent();
         _apiService = new ApiService(new HttpClient());
+
+        // Reseta o usuário ao entrar na tela
+        UsuarioId = 0;
+        App.CurrentUserId = 0;
     }
 
     private async void OnCadastrarClicked(object sender, EventArgs e)
@@ -22,7 +26,7 @@ public partial class CadastroPage : ContentPage
             var usuario = new Usuario
             {
                 Nome = entryNome.Text,
-                Sexo = pickerSexo.SelectedItem?.ToString() // Remove a idade
+                Sexo = pickerSexo.SelectedItem?.ToString()
             };
 
             if (string.IsNullOrWhiteSpace(usuario.Nome) || string.IsNullOrWhiteSpace(usuario.Sexo))
@@ -33,13 +37,13 @@ public partial class CadastroPage : ContentPage
 
             int id = await _apiService.CadastrarUsuario(usuario);
             UsuarioId = id;
+            App.CurrentUserId = id;
 
             await DisplayAlert("Sucesso", $"Usuário cadastrado com ID: {id}", "OK");
 
-            // Navega para a aba "Score"
             if (Parent is TabbedPage tabbedPage)
             {
-                tabbedPage.CurrentPage = tabbedPage.Children[2]; // Índice da aba "Score"
+                tabbedPage.CurrentPage = tabbedPage.Children[2]; // Vai para TestePage
             }
         }
         catch (Exception ex)

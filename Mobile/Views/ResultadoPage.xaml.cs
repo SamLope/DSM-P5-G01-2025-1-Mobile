@@ -100,6 +100,31 @@ public partial class ResultadoPage : ContentPage
         await imageResultado.ScaleTo(1, 300, Easing.BounceOut);
     }
 
+    private void OnRefazerTesteClicked(object sender, EventArgs e)
+    {
+        // Limpa armazenamento local
+        var storageService = new LocalStorageService();
+        storageService.ClearRespostas();
 
-    
+        // Reseta o ID do usuário
+        App.CurrentUserId = 0;
+
+        // Navega para aba Home (índice 0)
+        if (Parent is TabbedPage tabbedPage)
+        {
+            // Reseta completamente a aba TestePage (índice 2) para reconstruí-la do zero
+            tabbedPage.Children[2] = new TestePage();
+
+            // Opcional: também resetar CadastroPage, se quiser
+            tabbedPage.Children[1] = new CadastroPage();
+
+            // Vai para Home
+            tabbedPage.CurrentPage = tabbedPage.Children[0];
+        }
+    }
+
+
+
+
+
 }

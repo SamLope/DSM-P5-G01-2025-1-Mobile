@@ -19,12 +19,7 @@
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    TextColor="{StaticResource PrimaryColor}">
-                <Label.Shadow>
-                    <Shadow Brush="Black"
-                            Offset="2,2"
-                            Opacity="0.8"
-                            Radius="2"/>
-                </Label.Shadow>
+                
             </Label>
 
             <Label Text="Aplicativo para classificar seu Score."

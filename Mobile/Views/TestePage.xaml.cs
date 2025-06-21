@@ -27,11 +27,14 @@ namespace Mobile.Views
             {
                 loadingIndicator.IsVisible = true;
 
-                var respostasSalvas = await _storageService.LoadRespostasAsync();
-                if (respostasSalvas.Any())
+                if (App.CurrentUserId != 0) // Só carrega dados antigos se usuário já estiver logado
                 {
-                    _viewModel.Respostas.AddRange(respostasSalvas);
-                    _viewModel.VerificarCompletude();
+                    var respostasSalvas = await _storageService.LoadRespostasAsync();
+                    if (respostasSalvas.Any())
+                    {
+                        _viewModel.Respostas.AddRange(respostasSalvas);
+                        _viewModel.VerificarCompletude();
+                    }
                 }
 
                 await CarregarPerguntasTeste();
@@ -53,7 +56,6 @@ namespace Mobile.Views
                 _viewModel.Perguntas.Clear();
 
                 var perguntasApi = await App.ApiClient.GetPerguntasAsync();
-
                 var perguntasOrdenadas = perguntasApi.OrderBy(p => p.Id).ToList();
 
                 foreach (var pergunta in perguntasOrdenadas)
@@ -125,10 +127,8 @@ namespace Mobile.Views
             {
                 loadingIndicator.IsVisible = true;
 
-                //  Salva localmente
                 await _storageService.SaveRespostasAsync(_viewModel.Respostas);
 
-                //  Prepara objeto RespostasAgregadas com as respostas
                 var respostasAgregadas = new RespostasAgregadas
                 {
                     IdUsuario = App.CurrentUserId,
@@ -144,22 +144,16 @@ namespace Mobile.Views
                     Resposta10 = ObterValorResposta(10)
                 };
 
-                //  Serializa para JSON
                 var json = JsonSerializer.Serialize(respostasAgregadas);
-
-                //  MOSTRA no Console para ver se está correto
                 Console.WriteLine("Payload enviado: " + json);
 
-                //  Envia para API
                 await App.ApiClient.EnviarRespostasAgregadas(respostasAgregadas);
 
-                //  Mensagem de sucesso 
                 await DisplayAlert("Sucesso", "Respostas enviadas com sucesso!", "OK");
 
-                //  Vai para ResultadoPage
                 if (Parent is TabbedPage tabbedPage)
                 {
-                    tabbedPage.CurrentPage = tabbedPage.Children[3]; 
+                    tabbedPage.CurrentPage = tabbedPage.Children[3];
                 }
             }
             catch (Exception ex)
@@ -171,8 +165,6 @@ namespace Mobile.Views
                 loadingIndicator.IsVisible = false;
             }
         }
-
-
 
         private string ObterValorResposta(int idPergunta)
         {
