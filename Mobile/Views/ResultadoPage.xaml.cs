@@ -52,6 +52,7 @@ public partial class ResultadoPage : ContentPage
         labelNome.Text = $"{nome} seu Score é:";
 
         string mensagem, corFundo, corTexto, imagem;
+        string imagemFundo = null;
 
         switch (resultado)
         {
@@ -59,21 +60,21 @@ public partial class ResultadoPage : ContentPage
                 labelResultado.Text =  "Excelente!";
                 mensagem = "Parabéns! Seu score está excelente.";
                 imagem = "logogreen.png";
-                corFundo = "#C8E6C9";
+                imagemFundo = "fundogreen.png";
                 corTexto = "#2E7D32";
                 break;
             case 1:
                 labelResultado.Text = " Médio!";
                 mensagem = "Você está no caminho certo. Continue melhorando!";
                 imagem = "logoyellow.png";
-                corFundo = "#FFF9C4";
+                imagemFundo = "fundoyelow.png";
                 corTexto = "#FBC02D";
                 break;
             case 0:
                 labelResultado.Text = "Ruim!";
                 mensagem = "Não desanime. Você pode melhorar!";
                 imagem = "logored.png";
-                corFundo = "#FFCDD2";
+                imagemFundo = "fundored.png";
                 corTexto = "#C62828";
                 break;
             default:
@@ -87,7 +88,9 @@ public partial class ResultadoPage : ContentPage
 
         labelResultado.TextColor = Color.FromArgb(corTexto);
         labelMensagem.Text = mensagem;
-        resultadoPage.BackgroundColor = Color.FromArgb(corFundo);
+        backgroundImage.Source = imagemFundo;
+        backgroundImage.Opacity = 0.2;
+
         imageResultado.Source = imagem;
 
         // animação

@@ -5,30 +5,37 @@
              x:Name="resultadoPage"
              BackgroundColor="White">
 
-    <StackLayout Padding="30" Spacing="20" HorizontalOptions="Center">
+    <Grid>
+        <Image x:Name="backgroundImage"
+               Aspect="AspectFill"
+               Opacity="1"
+               IsVisible="True" />
 
-        <Image x:Name="imageResultado" HeightRequest="300" HorizontalOptions="Center" Opacity="0"/>
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="20" HorizontalOptions="Center">
 
-        <Label x:Name="labelNome"
+                <Image x:Name="imageResultado" HeightRequest="300" HorizontalOptions="Center" Opacity="0"/>
+
+                <Label x:Name="labelNome"
                FontSize="25"
                FontAttributes="Bold"
                TextColor="Black"
                HorizontalOptions="Center"/>
 
-        <Label x:Name="labelUltimoUsuario"
+                <Label x:Name="labelUltimoUsuario"
                FontSize="18"
                TextColor="DarkGray"
                HorizontalOptions="Center"
                Margin="0,20,0,0" />
 
 
-        <Label x:Name="labelResultado"
+                <Label x:Name="labelResultado"
                FontSize="45"
                FontAttributes="Bold"
                TextColor="Black"
                HorizontalOptions="Center"/>
 
-        <Label x:Name="labelMensagem"
+                <Label x:Name="labelMensagem"
                FontSize="18"
                FontAttributes="Italic"
                TextColor="Black"
@@ -36,7 +43,9 @@
                HorizontalTextAlignment="Center"
                Margin="30,45"/>
 
-        
 
-    </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
